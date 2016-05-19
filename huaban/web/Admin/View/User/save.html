@@ -1,0 +1,90 @@
+<extend name="Public/index"/>
+<block name="content">
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">用户修改</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <div class="row">
+                   <div class="col-lg-12">
+                       <div class="panel panel-default">
+                           <div class="panel-heading">
+                               Basic Form Elements
+                           </div>
+                           <div class="panel-body">
+                               <div class="row">
+                                   <div class="col-lg-6">
+                                       <form role="form" action="{:U('Admin/User/update')}" method="post" enctype="multipart/form-data">
+                                           <input type="hidden" name="id" value="{$info.id}">
+                                           <div class="form-group">
+                                               <label>用户名</label>
+                                               <input value="{$info.username}" name="username" placeholder="请输入6~18位数字,字母,下划线" class="form-control">
+                                           </div>
+                                           <div class="form-group">
+                                               <label>密码</label>
+                                               <input value="{$info.password}" type="password" name="password" placeholder="请输入6~18位数字,字母,下划线" class="form-control">
+                                           </div>
+                                           <div class="form-group">
+                                               <label>邮箱</label>
+                                               <input value="{$info.email}" type="text" name="email" placeholder="请输入合法邮箱账号" class="form-control">
+                                           </div>
+
+                                           <div class="form-group">
+                                               <label>上传头像</label>
+                                               <input name="pic" type="file">
+                                               <img src="{$info.pic}" width="100px">
+                                           </div>
+                                          
+                                         
+                                           <div class="form-group">
+                                               <label>兴趣爱好</label>
+                                               <label class="checkbox-inline">
+                                                   <input name="hobby[]" <if condition="in_array('0',$hobby) "> checked</if> value="0" type="checkbox">篮球
+                                               </label>
+                                               <label class="checkbox-inline">
+                                                   <input name="hobby[]" <if condition="in_array('1',$hobby) "> checked</if> value="1" type="checkbox">足球
+                                               </label>
+                                               <label class="checkbox-inline">
+                                                   <input name="hobby[]" <if condition="in_array('2',$hobby) "> checked</if> value="2" type="checkbox">球球
+                                               </label>
+                                           </div>
+                                          
+                                           <div class="form-group">
+                                               <label>性别</label>
+                                               <label class="radio-inline">
+                                                   <input type="radio" checked="" <if condition="$info['sex'] eq 1"> checked</if> value="1" id="optionsRadiosInline1" name="sex">男
+                                               </label>
+                                               <label class="radio-inline">
+                                                   <input type="radio" value="0" <if condition="$info['sex'] eq 0"> checked</if> id="optionsRadiosInline2" name="sex">女
+                                               </label>
+                                               <label class="radio-inline">
+                                                   <input type="radio" value="2" <if condition="$info['sex'] eq 2"> checked</if> id="optionsRadiosInline3" name="sex">保密
+                                               </label>
+                                           </div>
+
+                                            <div class="form-group">
+                                               <label>个人简介</label>
+                                               <textarea name="intro" rows="3" class="form-control">{$info.intro}</textarea>
+                                           </div>
+
+                                           <button class="btn btn-warning" type="reset">重置</button>
+                                           <button class="btn btn-info" type="submit">提交</button>
+                                       </form>
+                                   </div>
+                             <!--   http://localhost/Class/s43/project/index.php/Admin/User/add.html
+                               http://localhost/Class/s43/project/index.php/Admin/User/add.shtml
+                               lamp43/Admin/User/add
+                               lamp43/Admin/User/add.html -->
+                               </div>
+                               <!-- /.row (nested) -->
+                           </div>
+                           <!-- /.panel-body -->
+                       </div>
+                       <!-- /.panel -->
+                   </div>
+                   <!-- /.col-lg-12 -->
+               </div>
+</div>
+</block>

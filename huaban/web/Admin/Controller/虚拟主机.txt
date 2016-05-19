@@ -1,0 +1,21 @@
+/*
+		配置虚拟主机
+		1,修改httpd.conf (搜索httpd-vhosts.conf)
+			Include conf/extra/httpd-vhosts.conf(前面的#去掉)
+		2,修改过httpd-vhosts.conf文件
+			C:\two\wamp\bin\apache\apache2.2.22\conf\extra
+			<VirtualHost *:80>
+			    ServerAdmin webmaster@dummy-host2.example.com
+			    DocumentRoot "C:/two/wamp/www/Class/SH42/project/" 
+			    ServerName   lamp.cn           
+			    ErrorLog "logs/dummy-host2.example.com-error.log"
+			    CustomLog "logs/dummy-host2.example.com-access.log" common
+			</VirtualHost>
+		3,文件hosts
+			C:\Windows\System32\drivers\etc
+		4,重启apache服务
+
+		<1>apache服务器勾选模块 :rewrite_module
+		
+		<2>url重写文件 .htaccess
+    	*/

@@ -1,0 +1,93 @@
+<extend name="Public/index"/>
+<block name="content">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">商品添加</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <div class="row">
+       <div class="col-lg-12">
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   Basic Form Elements
+               </div>
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-lg-6">
+                           <form role="form" action="{:U('Admin/Goods/insert')}" method="post" enctype="multipart/form-data">
+                               
+                              <div class="form-group">
+                                  <label>所属分类列表</label>
+                                  <select name="cid" class="form-control">
+                                     <foreach name="cates" item="vo" key="k" > 
+                                       <option value="{$vo.id}">{$vo.name}</option>
+                                     </foreach>
+                                  </select>
+                              </div>
+
+                               <div class="form-group">
+                                   <label>商品名</label>
+                                   <input name="title"  class="form-control">
+                               </div>
+                               <div class="form-group">
+                                   <label>价格</label>
+                                   <input type="text" name="price"  class="form-control">
+                               </div>
+                               <div class="form-group">
+                                   <label>商品数量</label>
+                                   <input type="text" name="num" class="form-control">
+                               </div>
+
+                               <div class="form-group">
+                                   <label>商品图片</label>
+                                   <input name="pic" type="file">
+                               </div>
+
+                               <div class="form-group">
+                                   <label>验证码</label>
+                                   <input name="vcode" class="form-control">
+                                   <img src="{:U('Admin/Public/CreateVcode')}" onclick="this.src=this.src+'?a'" alt="">
+                               </div>
+
+                                <div class="form-group">
+                                   <label>商品详情</label>
+
+                                    <script id="editor" name="content" type="text/plain" style="width:800px;height:500px;">
+                                      {$res.content}
+                                    </script>
+                               </div>
+
+                               <button class="btn btn-warning" type="reset">重置</button>
+                               <button class="btn btn-info" type="submit">提交</button>
+                           </form>
+                       </div>
+                   </div>
+                   <!-- /.row (nested) -->
+               </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+       </div>
+       <!-- /.col-lg-12 -->
+   </div>
+</div>
+<script type="text/javascript">
+    
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor',{
+     toolbars: [
+         ['fullscreen', 'source', 'undo', 'redo'],
+         ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
+     ]
+    });
+
+
+</script>
+</block>

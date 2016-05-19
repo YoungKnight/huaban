@@ -1,0 +1,139 @@
+<extend name="Public/index"/>
+<block name="content">
+    <div id="page-wrapper">
+        <div class="row">
+              <div class="col-lg-12">
+                    <h1 class="page-header">分类列表</h1>
+              </div><!-- /.col-lg-12 -->
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <!-- DataTables Advanced Tables -->
+                    </div><!-- /.panel-heading -->
+                    <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row">
+                            <form action="{:U('Admin/Cate/index')}" method="get">     
+                                <div class="col-sm-6">
+                                    <div class="dataTables_length" id="dataTables-example_length">
+                                        <label>显示 
+                                            <select name="num" aria-controls="dataTables-example" class="form-control input-sm">
+                                                <option <?php echo $_GET['num'] == 5 ? 'selected' : '' ?> value="5">5</option> 
+                                                <option <?php echo $_GET['num'] == 10 ? 'selected' : '' ?> value="10">10</option>
+                                                <option <?php echo $_GET['num'] == 15 ? 'selected' : '' ?> value="15">15</option>
+                                                <option <?php echo $_GET['num'] == 20 ? 'selected' : '' ?> value="20">20</option>
+                                            </select>
+                                            条
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="dataTables-example_filter" class="dataTables_filter">
+                                        <label>按分类名查询:<input value="{$Think.get.keyword}" name="keyword" type="search" class="form-control input-sm"   placeholder="" aria-controls="dataTables-example"></label>
+                                        <button type="submit" class="btn btn-info">查询</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+
+                            <div class="row">
+                            <div class="col-sm-12">
+                                <!-- 用户列表遍历 -->
+                                <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 30px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 129px;" aria-label="Browser: activate to sort column ascending">分类名</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 124px;" aria-label="Platform(s): activate to sort column ascending">是否显示</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 70px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <foreach name="cates" item="vo" key="k" >   
+                                            <tr class="gradeA odd text-center" role="row">
+                                                <td class="sorting_1 sid">{$vo.id}</td>
+                                                <td>{$vo.name}</td>
+                                                <td>
+                                                
+                                                    <if condition="($vo.display eq 1) ">
+                                                        <a href="{:U('Cate/change',array('id'=>$vo['id'],'display'=>0))}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span> 显　示</a>
+                                                    <else />
+                                                        <a href="{:U('Cate/change',array('id'=>$vo['id'],'display'=>1))}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> 不显示</a>
+                                                    </if>
+                                                </td>
+
+                                                <td class="center">
+                                                    <a href="{:U('Admin/Cate/save',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                                                    <a href="" class="btn btn-danger btn-del btn-sm"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                                                </td>
+                                            </tr>
+                                        </foreach>
+                                    </tbody>
+                                </table>         
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">快看我快看我 ^_^ !</div>
+                                </div>
+                                <style type="text/css">
+                                    #pages a,#pages span{
+                                        background-color: #fff;
+                                        border: 1px solid #ddd;
+                                        color: #337ab7;
+                                        float: left;
+                                        line-height: 1.42857;
+                                        margin-left: -1px;
+                                        padding: 6px 12px;
+                                        position: relative;
+                                        text-decoration: none;
+                                    }
+                                    #pages span {
+                                        background-color: #337ab7;
+                                        border-color: #337ab7;
+                                        color: #fff;
+                                        cursor: default;
+                                        z-index: 2;
+                                    }
+                                </style>
+                                <div class="col-sm-6">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                    <div id="pages">{$pages}</div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        //绑定单击事件
+        $('.btn-del').click(function(){
+      // alert('222');
+
+      //获取id
+      var id = $(this).parents('tr').find('.sid').html();
+      var url = "{:U('Admin/Cate/ajaxdel')}";
+      // alert(url);
+      var btn = $(this);
+      //ajax
+      $.get(url,{id:id},function(data){
+        // console.log(data);
+        if(data == 1){
+          // alert('成功');
+         btn.parents('tr').remove();
+        }else{
+          alert('删除失败');
+        }
+      })
+        })
+    </script>
+</block>
